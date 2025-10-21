@@ -5,7 +5,7 @@
 # load packages and enable backend
 
 from mqss.qiskit_adapter import MQSSQiskitAdapter
-from qiskit import QuantumCircuit, transpile, QuantumRegister, ClassicalRegister
+from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
 
 import math
 import matplotlib.pyplot as plt
@@ -15,7 +15,7 @@ adapter = MQSSQiskitAdapter(token=token)
 [backend] = adapter.backends(name="<backend")
 
 
-# Set the parameters
+# Set parameters
 
 n = 4  # x is an n-bit number; feel free to change it, n>=2 must hold
 shots = 200  # number of shots per run
