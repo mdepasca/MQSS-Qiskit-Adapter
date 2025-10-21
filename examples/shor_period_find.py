@@ -14,7 +14,8 @@ token = "<token>"
 adapter = MQSSQiskitAdapter(token=token)
 [backend] = adapter.backends(name="<backend")
 
-# Set parameters
+
+# Set the parameters
 
 n = 4  # x is an n-bit number; feel free to change it, n>=2 must hold
 shots = 200  # number of shots per run
