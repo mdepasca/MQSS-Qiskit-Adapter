@@ -7,6 +7,9 @@ from mqss.qiskit_adapter import MQSSQiskitAdapter
 from qiskit import QuantumCircuit
 import numpy as np
 
+# Visualization
+from qiskit.visualization import plot_histogram
+
 # Connect to MQSS
 adapter = MQSSQiskitAdapter("<token>")
 backend = adapter.get_backend("<backend>")
@@ -40,7 +43,5 @@ job = backend.run(qc, shots=200, qasm3=False, queued=True)
 counts = job.result().get_counts()
 print("results:", counts)
 
-# Visualization
-from qiskit.visualization import plot_histogram
 
 plot_histogram(counts)

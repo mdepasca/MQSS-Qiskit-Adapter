@@ -4,6 +4,7 @@
 
 from mqss.qiskit_adapter import MQSSQiskitAdapter
 from qiskit import QuantumCircuit, transpile
+from qiskit.visualization import plot_histogram
 
 token = "<token>"
 adapter = MQSSQiskitAdapter(token=token)
@@ -44,6 +45,5 @@ print("Result: ", counts)
 
 # Visualize Results
 
-from qiskit.visualization import plot_histogram
 
 plot_histogram(counts, figsize=(12, 6))
