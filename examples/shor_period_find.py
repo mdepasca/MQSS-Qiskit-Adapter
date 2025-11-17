@@ -1,19 +1,25 @@
 # Shor period finding example
-
 # Find period of **f(x) = 13^x mod 15**
 
 # load packages and enable backend
 
 from mqss.qiskit_adapter import MQSSQiskitAdapter
 from qiskit import QuantumCircuit, QuantumRegister, ClassicalRegister
-
+import os
+from dotenv import load_dotenv
 import math
 import matplotlib.pyplot as plt
 
-token = "<token>"
-adapter = MQSSQiskitAdapter(token=token)
-[backend] = adapter.backends(name="<backend")
+# Loading variables from the .env file
 
+load_dotenv()  # reads .env if present
+token = os.getenv("MQP_TOKEN")
+backend_name = os.getenv("MQP_BACKEND")
+
+# Initialize MQSS adapter and get backend
+
+adapter = MQSSQiskitAdapter(token=token)
+backend = adapter.get_backend(backend_name)
 
 # Set parameters
 
@@ -22,10 +28,8 @@ shots = 200  # number of shots per run
 
 # Define function
 
-
 def f(x):
     return pow(13, x, 15)
-
 
 # Generate circuit
 
@@ -71,15 +75,12 @@ qc.draw(scale=0.5, output="mpl")
 
 # Run circuit on hardware
 
-result = backend.run(qc, shots=shots, optimization_level=3).result()
+job = backend.run(qc, shots=200, qasm3=True, queued=True)
+counts = job.result().get_counts()
+print("results:", counts) # e.g. for n=4 1100 is 12, which is 3*2^4/4
 
-counts = result.get_counts()
+# Visualization
 
-print(f"Result counts: {counts}")  # e.g. for n=4 1100 is 12, which is 3*2^4/4
-
-# Plotting the results
-
-# plotting:
 x = list(counts.keys())
 x_values = []
 for item in x:
