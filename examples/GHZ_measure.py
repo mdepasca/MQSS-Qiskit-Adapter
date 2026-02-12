@@ -31,7 +31,7 @@ qc.measure_all(add_bits=False)
 trans_qc = transpile(qc, backend, optimization_level=3)
 
 # Run job
-job = backend.run(trans_qc, no_modify=False, shots=shots, qasm3=True, queued=True)
+job = backend.run(trans_qc, no_modify=True, shots=shots, queued=True)
 counts = job.result().get_counts()
 print("Result:", counts)
 

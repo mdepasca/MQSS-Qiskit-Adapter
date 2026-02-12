@@ -65,7 +65,7 @@ qc.barrier()
 qc.measure(qr_x, cr_x)
 
 # Run job
-job = backend.run(qc, shots=shots, qasm3=True, queued=True)
+job = backend.run(qc, shots=shots, queued=True)
 counts = job.result().get_counts()
 print("Results:", counts)
 
